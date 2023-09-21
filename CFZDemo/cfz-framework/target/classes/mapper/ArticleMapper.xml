@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cfz.mapper.ArticleMapper">
+    <select id="selectTagById" resultType="com.cfz.entity.Tag">
+    SELECT
+	    st.id
+    FROM
+	    sg_article_tag AS sat
+	    LEFT JOIN sg_tag AS st ON sat.tag_id = st.id
+    WHERE
+	    sat.article_id =#{id};
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "oss",
+      "type": "com.cfz.service.impl.OSSUpLoadServiceImpl",
+      "sourceType": "com.cfz.service.impl.OSSUpLoadServiceImpl"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

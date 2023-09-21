@@ -1,0 +1,29 @@
+server:
+  port: 8989
+spring:
+  datasource:
+    url: jdbc:mysql://47.99.49.22:3306/cfz_blog?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: mysql0830
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+
+mybatis-plus:
+#  configuration:
+#    # 日志
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
+
+#七牛云OSS
+oss:
+  accessKey: a_OaSnzAFpmvgupELkN_Efxe6cFrcpIgIRx-D9-8
+  secretKey: M-wkpdqKLlMihkNG1KOWyR5IDw-dwcX55jQTF7JQ
+  bucket: cfz-blog1

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfz.mapper.MenuMapper">
+
+    <select id="selectPermaByUserId" resultType="java.lang.String">
+    SELECT
+		DISTINCT m.perms
+	FROM
+		sys_user_role as ur
+		LEFT JOIN sys_role_menu AS rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu AS m ON m.id = rm.menu_id
+	WHERE
+		ur.user_id = #{id} AND
+		m.`status` = 0 AND
+		m.menu_type IN ('C','F') AND
+		m.del_flag = 0
+    </select>
+
+    <select id="selectAllRouterMneu" resultType="com.cfz.entity.Menu">
+	SELECT
+		DISTINCT m.id,m.menu_name,m.parent_id,m.order_num,m.path,m.component,m.menu_type,m.visible,m.status,m.perms,m.icon,m.create_time,m.is_frame
+	FROM
+		sys_menu AS m
+	WHERE
+		m.`status` = 0 AND
+		m.menu_type IN ('C','M') AND
+		m.del_flag = 0
+	ORDER BY
+		m.parent_id,m.order_num
+	</select>
+
+	<select id="selectRouterMenuById" resultType="com.cfz.entity.Menu">
+	SELECT
+		DISTINCT m.id,m.menu_name,m.parent_id,m.order_num,m.path,m.component,m.menu_type,m.visible,m.status,NULLIF(m.perms,''),m.icon,m.create_time,m.is_frame
+	FROM
+		sys_user_role as ur
+		LEFT JOIN sys_role_menu AS rm ON ur.role_id = rm.role_id
+		LEFT JOIN sys_menu AS m ON m.id = rm.menu_id
+	WHERE
+		m.id = #{userId} AND
+		m.`status` = 0 AND
+		m.menu_type IN ('C','M') AND
+		m.del_flag = 0
+	ORDER BY
+		m.parent_id,m.order_num
+	</select>
+</mapper>
